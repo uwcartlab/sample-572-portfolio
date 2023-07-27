@@ -5,7 +5,6 @@ body{
 .scroll-container{
     display:block;
 }
-
 /*background/foreground*/
 .background-item{
     width:100%;
@@ -28,6 +27,9 @@ body{
 .center, .center-wide{
     text-align:center;
 }
+.left, .right-inline{
+    display:inline-block;
+}
 .half-width{
     width:50%;
 }
@@ -45,6 +47,9 @@ body{
 .title{
     height:100vh;   
 }
+.title > * {
+    display:inline-block;
+}
 .title h1{
     font-size:100px;
 }
@@ -52,8 +57,6 @@ body{
 /*bottom margin styles*/
 .row{
     margin-bottom:30%;
-    padding-right: var(--bs-gutter-x,.75rem);
-    padding-left: var(--bs-gutter-x,.75rem);
 }
 
 /*smaller bottom margin for rows in the foreground*/
@@ -62,6 +65,7 @@ body{
 }
 .no-margin{
     margin-bottom:0 !important;
+    margin-top:0 !important;
 }
 .lg-margin{
     margin-bottom:100% !important;
@@ -72,7 +76,7 @@ body{
 
 /*block styles*/
 .rounded{
-    border-radius:10%;
+    border-radius:2%;
 }
 .background-white{
     background-color:white;
@@ -112,6 +116,85 @@ body{
     to {opacity: 1;} 
  } 
 
+/*slideshow*/
+/*slideshow container */
+.slideshow-container {
+    width:100%;
+    position: relative;
+    margin: auto;
+}
+
+/* hide the images by default */
+.slide {
+    display: none;
+}
+
+/* next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: calc(50% - 30px);
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+/* position next button to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+/* position prev button to the left */
+.prev{
+    left: 0;
+}
+
+/* hover styling for next/prev buttons */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.5);
+    color:white;
+}
+
+.slide > img{
+    width:100%;
+}
+
+/* image captions */
+.caption {
+    color: #f2f2f2;
+    font-size: 20px;
+    padding: 8px 0px;
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+    background:rgba(0,0,0,0.3)
+}
+
+/* the dots/bullets/indicators */
+.slideshow-dots{
+    text-align:center;
+}
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 15px 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
 
 @media screen and (min-width: 1200px) {
     .center{
@@ -136,6 +219,8 @@ body{
     }
     .right-inline{
         width: 41.66666667% !important;
+        margin-left:20px;
+        position:absolute;
     }
 }
     @media screen and (min-width: 720px) and (max-width: 1199px) {
@@ -151,16 +236,19 @@ body{
     }
     .left{
         flex: 0 0 auto;
-        width: 50% !important;
+        margin-left:5%;
+        width: 45% !important;
     }
     .right{
         flex: 0 0 auto;
         margin-left:50%;
-        width: 50% !important;
+        width: 45% !important;
     }
     .right-inline{
         flex: 0 0 auto;
-        width: 50% !important;
+        margin-left:20px;
+        width: 45% !important;
+        position:absolute;
     }
 
 }
@@ -172,16 +260,18 @@ body{
     }
     .left{
         flex: 0 0 auto;
-        width: 50% !important;
+        width: 48% !important;
     }
     .right{
         flex: 0 0 auto;
         margin-left:50%;
-        width: 50% !important;
+        width: 48% !important;
     }
     .right-inline{
         flex: 0 0 auto;
-        width: 50% !important;
+        width: 48% !important;
+        margin-left:10px;   
+        position:absolute;
     }
 }
 @media screen and (max-width: 539px) {
@@ -203,13 +293,13 @@ body{
     .foreground-item > .row{
         margin-bottom:100%;
     }
-}
-
-/*bootstrap carousel control*/
-#next-button, #prev-button{
-    background:rgba(0,0,0,0.1) !important;
-    width:75px;
-}
-#next-button:hover, #prev-button:hover{
-    background:rgba(0,0,0,0.2)
+    /*move slideshow caption*/
+    .caption{
+        top:100%;
+        background:none;
+        color:black;
+    }
+    .vert-center{
+        margin-top:0px !important;
+    }
 }

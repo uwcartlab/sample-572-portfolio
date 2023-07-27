@@ -1,17 +1,7 @@
-h1{
-    color:red;
+body{
+    font-family: 'Josefin Sans', sans-serif;
 }
-img {
-    height:300px;
-    width:400px; 
-}
-.largeTitle {
-    color:blue;  
-    font-size:72pt;
-}
-.lightGray{
-    background:rgb(230,230,230);
-}
-#specialLink{
-    font-weight:bold;
+
+iframe{
+    height:400px;
 }

@@ -43,8 +43,10 @@
         document.querySelectorAll('.vert-center').forEach(div =>{
             var height = div.clientHeight,
                 pHeight = div.parentNode.clientHeight;
+
+            console.log("calc(50% - " + (height/2) + ")")
                 
-            div.style.marginTop = (pHeight/2) - (height/2) + "px";
+            div.style.marginTop = "calc(50% - " + height + "px)";
         });
     }
     //resize background elements
@@ -73,8 +75,8 @@
                     //if the element is not a "text" element
                     if (child.nodeName != "#text" && child.nodeName != "#comment"){
                         //retrieve data-slide value to get the foreground item
-                        let id = child.dataset.slide ? child.dataset.slide : 0,
-                            nextId = child.nextElementSibling ? child.nextElementSibling.dataset.slide : null;
+                        let id = child.dataset.slide ? child.dataset.slide - 1 : 0,
+                            nextId = child.nextElementSibling ? child.nextElementSibling.dataset.slide - 1 : null;
                         //activate listener for each background item
                         document.addEventListener("scroll",function(){
                             //position at the bottom of the screen
@@ -105,6 +107,60 @@
             }
         })
     }
+    //slideshow functions
+    document.querySelectorAll(".slideshow-container").forEach(function(slideshow){
+        //set initial slide index and show first slide
+        let slideIndex = 1;
+        showSlides(slideIndex);
+        //if next button is clicked, advance to next slide
+        slideshow.querySelectorAll(".next").forEach(function(elem){
+            elem.addEventListener("click",function(){
+                let n = slideIndex++;
+                showSlides(n);
+            })
+        })
+        //if previous button is clicked, return to previous slide
+        slideshow.querySelectorAll(".prev").forEach(function(elem){
+            elem.addEventListener("click",function(){
+                slideIndex = slideIndex - 1;
+                showSlides(slideIndex);
+            })
+        })
+        //if a dot is clicked, move to that dot's slide position
+        slideshow.querySelectorAll(".dot").forEach(function(elem){
+            elem.addEventListener("click",function(){
+                slideIndex = Number(elem.id);
+                showSlides(slideIndex);
+            })
+        })
+        //funciton that shows the current slide
+        function showSlides(n) {
+            let i,
+                slides = slideshow.getElementsByClassName("slide"),
+                dots = slideshow.getElementsByClassName("dot");
+            //if the last slide in the slideshow has been reached, return to the beginning
+            if (n >= slides.length) {
+                slideIndex = 1
+            }
+            //if the first slide in the slideshow has been reached, advance to the end
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            //hide all slides
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            //acivate current dot
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            //show active slide
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        } 
+
+    })
+    
     //functions to fire on resize
     function resize(){
         rightPosition();
